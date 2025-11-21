@@ -81,15 +81,16 @@ Highlights:
 
 > Use `pnpm --filter contracts run deploy:sepolia` with the provided wallet/RPC to redeploy if needed. After deployment, run the `verify:sepolia` script (requires `ETHERSCAN_API_KEY` & `SHADOW_SIGN_ADDRESS` envs).
 
-### Frontend Environment
-Create `web/.env.local` with:
+### Frontend Environment (optional)
+The web app already ships with sensible public defaults, so Vercel deployments work even without configuring environment variables.  
+Only create `web/.env.local` if you want to **override** the baked-in values (e.g. point to a different contract or RPC):
 ```
 NEXT_PUBLIC_SHADOW_SIGN_ADDRESS=0x9B04E93D71dbFf919a024695469Ad0939aD402cC
 NEXT_PUBLIC_SEPOLIA_RPC=https://eth-sepolia.g.alchemy.com/v2/xeMfJRSGpIGq5WiFz-bEiHoG6DGrZnAr
 NEXT_PUBLIC_WALLETCONNECT_ID=<your_walletconnect_project_id>
 ```
 
-Then run `pnpm dev` from `web/`. (RainbowKit requires a valid WalletConnect Project ID; replace the placeholder with your own.)
+Then run `pnpm dev` from `web/`. (RainbowKit only uses the WalletConnect ID if you override it; the bundled placeholder works for injected wallets such as MetaMask/OKX/Coinbase/Bitget.)
 
 ## Deployment Checklist
 - [x] Contract deployed + verified on Sepolia (address recorded above).
