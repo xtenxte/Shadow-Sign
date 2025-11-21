@@ -27,10 +27,7 @@ export function GhibliStatusBar() {
   };
 
   return (
-    <div
-      className="absolute z-20"
-      style={{ top: 24, right: 24, pointerEvents: "auto" }}
-    >
+    <div className="fixed z-50" style={{ top: 24, right: 24 }}>
       <div
         className="text-sm min-w-[300px] pointer-events-auto"
         style={{
