@@ -27,7 +27,7 @@ const RESULT_LABELS = ["Draw", "Player", "Machine"] as const;
 
 type EncryptedSnapshot = {
   score: { player: Hex; machine: Hex };
-  history: { rounds: Hex[]; roundCount: number };
+  history: Hex[];
   moves: { player: Hex; machine: Hex };
 };
 
@@ -73,7 +73,7 @@ export function useShadowSignGame() {
         abi: shadowSignAbi,
         functionName: "getRoundHistory",
         account: address,
-      }) as Promise<readonly [readonly Hex[], bigint]>,
+      }) as Promise<readonly Hex[]>,
       publicClient.readContract({
         address: SHADOW_SIGN_ADDRESS,
         abi: shadowSignAbi,
@@ -82,14 +82,9 @@ export function useShadowSignGame() {
       }) as Promise<[Hex, Hex]>,
     ]);
 
-    const normalizedHistory = history[0].slice(
-      0,
-      Number(history[1]),
-    ) as Hex[];
-
     const payload: EncryptedSnapshot = {
       score: { player: score[0], machine: score[1] },
-      history: { rounds: normalizedHistory, roundCount: Number(history[1]) },
+      history: [...history],
       moves: { player: moves[0], machine: moves[1] },
     };
 
@@ -120,7 +115,7 @@ export function useShadowSignGame() {
             payload.score.machine,
             payload.moves.player,
             payload.moves.machine,
-            ...payload.history.rounds,
+            ...payload.history,
           ].filter(Boolean) as Hex[],
         ),
       );
@@ -141,7 +136,7 @@ export function useShadowSignGame() {
         player: decryptedMap[payload.moves.player] ?? -1,
         machine: decryptedMap[payload.moves.machine] ?? -1,
       };
-      const decryptedHistory = payload.history.rounds.map(
+      const decryptedHistory = payload.history.map(
         (handle) => decryptedMap[handle] ?? 0,
       );
 

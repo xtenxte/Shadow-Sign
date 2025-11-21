@@ -43,6 +43,7 @@ Key file: `contracts/contracts/ShadowSign.sol`
 - Maintains encrypted scores (`euint8`), last moves, and round history per challenger.
 - Generates the machine's stance with `FHE.randEuint8()` and never exposes plaintext.
 - `_shareValue` ensures both the contract and challenger retain access to encrypted values for future operations.
+- Round history is now unbounded (dynamic array), so prolonged draw streaks can continue until someone reaches two wins without forcing a manual reset.
 
 ### Scripts
 | Command | Description |
@@ -76,8 +77,8 @@ Highlights:
 
 ## Deployment
 - **Network**: Sepolia  
-- **Contract**: `0x9B04E93D71dbFf919a024695469Ad0939aD402cC`  
-- **Etherscan**: https://sepolia.etherscan.io/address/0x9B04E93D71dbFf919a024695469Ad0939aD402cC
+- **Contract**: `0x78675755b8c2eaF5b6184bCf56A06102cBACdC23`  
+- **Etherscan**: https://sepolia.etherscan.io/address/0x78675755b8c2eaF5b6184bCf56A06102cBACdC23
 
 > Use `pnpm --filter contracts run deploy:sepolia` with the provided wallet/RPC to redeploy if needed. After deployment, run the `verify:sepolia` script (requires `ETHERSCAN_API_KEY` & `SHADOW_SIGN_ADDRESS` envs).
 
@@ -85,7 +86,7 @@ Highlights:
 The web app already ships with sensible public defaults, so Vercel deployments work even without configuring environment variables.  
 Only create `web/.env.local` if you want to **override** the baked-in values (e.g. point to a different contract or RPC):
 ```
-NEXT_PUBLIC_SHADOW_SIGN_ADDRESS=0x9B04E93D71dbFf919a024695469Ad0939aD402cC
+NEXT_PUBLIC_SHADOW_SIGN_ADDRESS=0x78675755b8c2eaF5b6184bCf56A06102cBACdC23
 NEXT_PUBLIC_SEPOLIA_RPC=https://eth-sepolia.g.alchemy.com/v2/xeMfJRSGpIGq5WiFz-bEiHoG6DGrZnAr
 NEXT_PUBLIC_WALLETCONNECT_ID=<your_walletconnect_project_id>
 ```

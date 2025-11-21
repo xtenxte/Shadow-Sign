@@ -4,7 +4,7 @@ export const REQUIRED_CHAIN = sepolia;
 export const REQUIRED_CHAIN_ID = sepolia.id;
 
 const DEFAULT_SHADOW_SIGN_ADDRESS =
-  "0x9B04E93D71dbFf919a024695469Ad0939aD402cC" as const;
+  "0x78675755b8c2eaF5b6184bCf56A06102cBACdC23" as const;
 const DEFAULT_SEPOLIA_RPC_URL =
   "https://eth-sepolia.g.alchemy.com/v2/xeMfJRSGpIGq5WiFz-bEiHoG6DGrZnAr";
 const DEFAULT_WALLETCONNECT_ID =

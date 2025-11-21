@@ -37,10 +37,8 @@ describe("ShadowSign (FHE)", function () {
   it("records encrypted round outcomes for the caller", async function () {
     await playEncryptedRound(0);
 
-    const history = await shadowSign.connect(challenger).getRoundHistory();
-    const [encryptedRounds, roundsPlayed] = history;
-
-    expect(Number(roundsPlayed)).to.equal(1);
+    const encryptedRounds = await shadowSign.connect(challenger).getRoundHistory();
+    expect(encryptedRounds.length).to.equal(1);
 
     const decrypted = await fhevm.userDecryptEuint(
       FhevmType.euint8,
@@ -79,8 +77,8 @@ describe("ShadowSign (FHE)", function () {
     expect(playerScore).to.equal(0);
     expect(machineScore).to.equal(0);
 
-    const [, roundsPlayed] = await shadowSign.connect(challenger).getRoundHistory();
-    expect(Number(roundsPlayed)).to.equal(0);
+    const history = await shadowSign.connect(challenger).getRoundHistory();
+    expect(history.length).to.equal(0);
   });
 });
 

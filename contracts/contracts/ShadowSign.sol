@@ -8,16 +8,13 @@ import {ZamaEthereumConfig} from "@fhevm/solidity/config/ZamaConfig.sol";
 /// @notice Implements the Shadow Sign gameplay loop entirely with encrypted inputs and outputs.
 contract ShadowSign is ZamaEthereumConfig {
     uint8 private constant MOVE_VARIANTS = 3;
-    uint8 private constant MAX_ROUNDS = 3;
-
     struct SeriesState {
         euint8 playerWins;
         euint8 machineWins;
         euint8 lastOutcome;
         euint8 lastPlayerMove;
         euint8 lastMachineMove;
-        euint8[3] roundHistory;
-        uint8 roundsPlayed;
+        euint8[] roundHistory;
     }
 
     mapping(address => SeriesState) private _series;
@@ -31,7 +28,6 @@ contract ShadowSign is ZamaEthereumConfig {
     /// @return outcome encrypted round result (0=Draw,1=PlayerWin,2=MachineWin).
     function playRound(externalEuint8 encryptedMove, bytes calldata proof) external returns (euint8 outcome) {
         SeriesState storage state = _series[msg.sender];
-        require(state.roundsPlayed < MAX_ROUNDS, "ShadowSign: series finished");
 
         euint8 playerMove = FHE.fromExternal(encryptedMove, proof);
         euint8 machineMove = _nextMachineMove();
@@ -43,8 +39,7 @@ contract ShadowSign is ZamaEthereumConfig {
         state.playerWins = _updatedScore(state.playerWins, outcome, 1);
         state.machineWins = _updatedScore(state.machineWins, outcome, 2);
 
-        state.roundHistory[state.roundsPlayed] = outcome;
-        state.roundsPlayed += 1;
+        state.roundHistory.push(outcome);
 
         state.lastOutcome = outcome;
         state.lastPlayerMove = playerMove;
@@ -52,7 +47,7 @@ contract ShadowSign is ZamaEthereumConfig {
 
         _allowSeries(state, msg.sender);
 
-        emit RoundPlayed(msg.sender, state.roundsPlayed, outcome);
+        emit RoundPlayed(msg.sender, uint8(state.roundHistory.length), outcome);
     }
 
     /// @notice Returns the encrypted score line for the caller.
@@ -68,9 +63,9 @@ contract ShadowSign is ZamaEthereumConfig {
     }
 
     /// @notice Returns encrypted round outcomes (Draw/Win/Lose) for up to three rounds.
-    function getRoundHistory() external view returns (euint8[3] memory history, uint8 roundsPlayed) {
+    function getRoundHistory() external view returns (euint8[] memory history) {
         SeriesState storage state = _series[msg.sender];
-        return (state.roundHistory, state.roundsPlayed);
+        return state.roundHistory;
     }
 
     /// @notice Clears every encrypted snapshot for a fresh best-of-three series.
@@ -82,10 +77,7 @@ contract ShadowSign is ZamaEthereumConfig {
         state.lastOutcome = FHE.asEuint8(0);
         state.lastPlayerMove = FHE.asEuint8(0);
         state.lastMachineMove = FHE.asEuint8(0);
-        state.roundHistory[0] = FHE.asEuint8(0);
-        state.roundHistory[1] = FHE.asEuint8(0);
-        state.roundHistory[2] = FHE.asEuint8(0);
-        state.roundsPlayed = 0;
+        delete state.roundHistory;
 
         _allowSeries(state, msg.sender);
 
