@@ -8,12 +8,7 @@ import {
   lightTheme,
   connectorsForWallets,
 } from "@rainbow-me/rainbowkit";
-import {
-  metaMaskWallet,
-  coinbaseWallet,
-  okxWallet,
-  bitgetWallet,
-} from "@rainbow-me/rainbowkit/wallets";
+import { metaMaskWallet, coinbaseWallet } from "@rainbow-me/rainbowkit/wallets";
 import { REQUIRED_CHAIN, SEPOLIA_RPC_URL, WALLETCONNECT_ID } from "@/lib/constants";
 import "@rainbow-me/rainbowkit/styles.css";
 
@@ -22,12 +17,7 @@ const connectors = connectorsForWallets(
   [
     {
       groupName: "Recommended",
-      wallets: [
-        metaMaskWallet,
-        coinbaseWallet,
-        okxWallet,
-        bitgetWallet,
-      ],
+      wallets: [metaMaskWallet, coinbaseWallet],
     },
   ],
   {
