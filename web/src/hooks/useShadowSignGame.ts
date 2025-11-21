@@ -293,6 +293,13 @@ export function useShadowSignGame() {
 
   const resetSeries = useCallback(async () => {
     if (!address) return;
+    
+    // Skip if there's no game data to reset (avoid wasting gas)
+    if (derived.history.length === 0 && derived.score.player === 0 && derived.score.machine === 0) {
+      setStatusText("No game to reset. Start playing!");
+      return;
+    }
+    
     setIsBusy(true);
     setLastError(null);
     setStatusText("Resetting encrypted arena…");
@@ -323,7 +330,7 @@ export function useShadowSignGame() {
     } finally {
       setIsBusy(false);
     }
-  }, [address, snapshot, writeContractAsync, refreshState, publicClient]);
+  }, [address, derived, snapshot, writeContractAsync, refreshState, publicClient]);
 
   return {
     snapshot: derived,
