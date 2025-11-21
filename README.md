@@ -1,7 +1,14 @@
 # Shadow Sign
 > Encrypted Man vs Machine duels powered by Zama FHEVM.
 
-Shadow Sign is a best-of-three rock–paper–scissors arena where both the challenger and the machine fight entirely under encryption. Moves, scores, and round history never leak as plaintext on-chain: the Solidity contract consumes encrypted inputs, computes encrypted outcomes, and the player decrypts results locally through Zama's Relayer SDK.
+Shadow Sign is a best-of-three rock–paper–scissors arena where both the challenger and the machine fight entirely under encryption.  
+
+**Rules in plain terms:**
+- You choose one of three gestures: **Rock (✊)**, **Paper (✋)**, or **Scissors (✌️)**.
+- Rock beats Scissors, Scissors beats Paper, and Paper beats Rock.
+- Each encrypted round produces a hidden outcome (Win / Lose / Draw); the first side to win **two rounds** wins the series.
+
+Moves, scores, and round history never leak as plaintext on-chain: the Solidity contract consumes encrypted inputs, computes encrypted outcomes, and the player decrypts results locally through Zama's Relayer SDK.
 
 ## Vision & Narrative
 - **Why FHE?** Rock–paper–scissors is trivial in plaintext but perfect to demonstrate FHE's promise: even validators cannot see either side's move, yet the contract decides winners deterministically.
