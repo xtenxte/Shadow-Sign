@@ -1,5 +1,7 @@
 "use client";
 
+import "@/lib/global-polyfill";
+
 import { ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider, http, createConfig } from "wagmi";
