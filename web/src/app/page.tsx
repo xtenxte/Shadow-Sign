@@ -127,6 +127,9 @@ export default function Home() {
               <p>Rock ✊ beats Scissors ✌️</p>
               <p>Scissors ✌️ beats Paper ✋</p>
               <p>Paper ✋ beats Rock ✊</p>
+              <p className="mt-2 text-sm text-gray-600">
+                First to win two rounds takes the series.
+              </p>
             </div>
           )}
 
