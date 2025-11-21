@@ -5,7 +5,16 @@ if (typeof window !== "undefined" && typeof global === "undefined") {
 }
 
 if (typeof globalThis.indexedDB === "undefined") {
-  (globalThis as any).indexedDB = null;
+  // Provide a minimal no-op mock for SSR environments where indexedDB isn't available
+  (globalThis as any).indexedDB = {
+    open: () => ({
+      onerror: null,
+      onsuccess: null,
+      result: null,
+    }),
+    deleteDatabase: () => ({}),
+    databases: async () => [],
+  };
 }
 
 if (typeof globalThis.IDBKeyRange === "undefined") {
