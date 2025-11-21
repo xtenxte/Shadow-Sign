@@ -114,6 +114,22 @@ export default function Home() {
             )}
           </div>
 
+          {/* Game Rules */}
+          {isConnected && (
+            <div 
+              className="text-gray-700 font-medium text-center"
+              style={{ 
+                marginTop: "1.5rem",
+                fontSize: "clamp(1rem, 2vw, 1.25rem)",
+                lineHeight: "1.6"
+              }}
+            >
+              <p>Rock ✊ beats Scissors ✌️</p>
+              <p>Scissors ✌️ beats Paper ✋</p>
+              <p>Paper ✋ beats Rock ✊</p>
+            </div>
+          )}
+
           {/* Warm Reminder */}
           {!isConnected && (
             <p className="text-sm text-gray-600 italic" style={{ marginTop: "1rem" }}>
