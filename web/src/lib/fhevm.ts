@@ -1,15 +1,14 @@
 import type { EIP1193Provider, Hex, WalletClient } from "viem";
-import type * as RelayerSDKModule from "@zama-fhe/relayer-sdk";
 import { SEPOLIA_RPC_URL } from "@/lib/constants";
 
 let fheInstance: any | null = null;
 let initPromise: Promise<any> | null = null;
-let sdkModulePromise: Promise<typeof RelayerSDKModule> | null = null;
+let sdkModulePromise: Promise<any> | null = null;
 
 /**
  * Dynamically load RelayerSDK via module import (avoids flaky CDN scripts)
  */
-async function loadRelayerSDK(): Promise<typeof RelayerSDKModule> {
+async function loadRelayerSDK(): Promise<any> {
   if (typeof window === "undefined") {
     throw new Error("RelayerSDK can only be loaded in the browser");
   }
@@ -27,7 +26,7 @@ async function loadRelayerSDK(): Promise<typeof RelayerSDKModule> {
         throw new Error("RelayerSDK module missing required exports");
       }
       console.log("✅ RelayerSDK module loaded");
-      return mod as unknown as typeof RelayerSDKModule;
+      return mod;
     })
     .catch((error) => {
       sdkModulePromise = null;
