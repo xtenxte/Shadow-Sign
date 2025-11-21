@@ -1,0 +1,229 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Caveat:wght@400;600&display=swap');
+
+:root {
+  --sky-blue: #87CEEB;
+  --grass-green: #9FD356;
+  --warm-yellow: #FFE5A0;
+  --soft-white: #FFF9E6;
+  --earth-brown: #8B7355;
+  --cloud-white: #FFFFFF;
+  --sunset-pink: #FFB6B9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* === Modal Animations === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html,
+body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background: linear-gradient(180deg, #87CEEB 0%, #B4E0F5 40%, #FFE5A0 100%);
+  color: #4A4A4A;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* === Floating clouds === */
+.cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 100px;
+  opacity: 0.7;
+  animation: float linear infinite;
+}
+
+.cloud::before,
+.cloud::after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 100px;
+}
+
+.cloud::before {
+  width: 50px;
+  height: 50px;
+  top: -25px;
+  left: 10px;
+}
+
+.cloud::after {
+  width: 60px;
+  height: 60px;
+  top: -30px;
+  right: 10px;
+}
+
+@keyframes float {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(calc(100vw + 100%));
+  }
+}
+
+/* === Swaying grass === */
+.grass {
+  position: absolute;
+  width: 2px;
+  background: linear-gradient(to top, #7CB342, #9FD356);
+  border-radius: 2px 2px 0 0;
+  transform-origin: bottom;
+  animation: sway 3s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%, 100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+/* === Hand-drawn paper buttons === */
+.ghibli-button {
+  position: relative;
+  background: #FFF9E6;
+  border: 3px solid #8B7355;
+  border-radius: 24px;
+  padding: 16px 40px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #4A4A4A;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 4px 0 #8B7355,
+    0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(0);
+}
+
+.ghibli-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 0 #8B7355,
+    0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+.ghibli-button:active {
+  transform: translateY(2px);
+  box-shadow: 
+    0 2px 0 #8B7355,
+    0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* === Info cards === */
+.ghibli-card {
+  background: rgba(255, 249, 230, 0.95);
+  border: 3px solid #8B7355;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+/* === Falling leaves === */
+@keyframes leaf-fall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.leaf {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #9FD356;
+  border-radius: 0 100% 0 100%;
+  animation: leaf-fall linear infinite;
+  opacity: 0;
+}
+
+/* === Game choice buttons (RPS) === */
+.game-choice {
+  width: 120px;
+  height: 120px;
+  background: #FFF9E6;
+  border: 4px solid #8B7355;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 0 #8B7355, 0 10px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(0);
+}
+
+.game-choice:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 0 #8B7355, 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.game-choice:active {
+  transform: translateY(3px);
+  box-shadow: 0 3px 0 #8B7355, 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* === Handwritten font helper === */
+.handwritten {
+  font-family: 'Caveat', cursive;
+  font-weight: 600;
+}
+
+/* === Soft drop shadow === */
+.soft-shadow {
+  box-shadow: 0 10px 40px rgba(139, 115, 85, 0.2);
+}

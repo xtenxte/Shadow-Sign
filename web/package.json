@@ -1,0 +1,35 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@rainbow-me/rainbowkit": "^2.2.9",
+    "@tanstack/react-query": "^5.90.10",
+    "@zama-fhe/relayer-sdk": "0.3.0-5",
+    "clsx": "^2.1.1",
+    "fhevmjs": "^0.6.2",
+    "framer-motion": "^12.23.24",
+    "lucide-react": "^0.554.0",
+    "next": "14.2.33",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "viem": "^2.39.3",
+    "wagmi": "^2.19.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.2.33",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

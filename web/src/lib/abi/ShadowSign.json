@@ -1,0 +1,145 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "ZamaProtocolUnsupported",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "challenger",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint8",
+          "name": "roundIndex",
+          "type": "uint8"
+        },
+        {
+          "indexed": false,
+          "internalType": "euint8",
+          "name": "encryptedOutcome",
+          "type": "bytes32"
+        }
+      ],
+      "name": "RoundPlayed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "challenger",
+          "type": "address"
+        }
+      ],
+      "name": "SeriesReset",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "confidentialProtocolId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getLatestMoves",
+      "outputs": [
+        {
+          "internalType": "euint8",
+          "name": "challengerMove",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "euint8",
+          "name": "machineMove",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getRoundHistory",
+      "outputs": [
+        {
+          "internalType": "euint8[3]",
+          "name": "history",
+          "type": "bytes32[3]"
+        },
+        {
+          "internalType": "uint8",
+          "name": "roundsPlayed",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getScore",
+      "outputs": [
+        {
+          "internalType": "euint8",
+          "name": "playerWins",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "euint8",
+          "name": "machineWins",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "externalEuint8",
+          "name": "encryptedMove",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes",
+          "name": "proof",
+          "type": "bytes"
+        }
+      ],
+      "name": "playRound",
+      "outputs": [
+        {
+          "internalType": "euint8",
+          "name": "outcome",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "resetSeries",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "contracts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "hardhat clean",
+    "build": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:sepolia": "hardhat run scripts/deployShadowSign.ts --network sepolia",
+    "verify:sepolia": "hardhat run scripts/verifyShadowSign.ts --network sepolia"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.20.0",
+  "devDependencies": {
+    "@fhevm/hardhat-plugin": "0.3.0-1",
+    "@fhevm/mock-utils": "0.3.0-1",
+    "@nomicfoundation/hardhat-toolbox": "^6.1.0",
+    "@types/node": "^24.10.1",
+    "@zama-fhe/relayer-sdk": "0.3.0-5",
+    "dotenv": "^17.2.3",
+    "hardhat": "^2.26.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@fhevm/solidity": "0.9.1",
+    "encrypted-types": "0.0.4"
+  }
+}
