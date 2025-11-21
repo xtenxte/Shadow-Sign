@@ -196,15 +196,19 @@ export function useShadowSignGame() {
 
   const derived = useMemo(() => {
     const score = snapshot.decryptedScore ?? { player: 0, machine: 0 };
-    const playerAhead = score.player >= 2;
-    const machineAhead = score.machine >= 2;
+    const playerWins = score.player >= 2;
+    const machineWins = score.machine >= 2;
+
+    // Only declare victory if one side reaches 2 wins AND has more wins than opponent
+    const playerVictory = playerWins && score.player > score.machine;
+    const machineVictory = machineWins && score.machine > score.player;
 
     return {
       score,
       history: snapshot.decryptedHistory ?? [],
       moves: snapshot.decryptedMoves ?? { player: -1, machine: -1 },
-      seriesOver: playerAhead || machineAhead,
-      victor: playerAhead ? "player" : machineAhead ? "machine" : null,
+      seriesOver: playerVictory || machineVictory,
+      victor: playerVictory ? "player" : machineVictory ? "machine" : null,
     };
   }, [snapshot]);
 
