@@ -125,7 +125,7 @@ function toHexString(value: unknown, label: string): Hex {
     "buffer" in value &&
     value.buffer instanceof ArrayBuffer
   ) {
-    return toHexString(new Uint8Array(value as ArrayLike<number>), label);
+    return toHexString(new Uint8Array(value as any), label);
   }
   throw new Error(`Unsupported ${label} format`);
 }
