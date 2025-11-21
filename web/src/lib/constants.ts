@@ -20,6 +20,6 @@ export const SEPOLIA_RPC_URL =
 export const WALLETCONNECT_ID =
   process.env.NEXT_PUBLIC_WALLETCONNECT_ID ?? DEFAULT_WALLETCONNECT_ID;
 
-export const PLAY_ROUND_GAS_LIMIT = 6_000_000n;
-export const RESET_SERIES_GAS_LIMIT = 3_000_000n;
+export const PLAY_ROUND_GAS_LIMIT = BigInt(6_000_000);
+export const RESET_SERIES_GAS_LIMIT = BigInt(3_000_000);
 
